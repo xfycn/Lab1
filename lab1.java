@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 //git test line
+//B2 change
 public class lab1 {
 	public static Scanner s = new Scanner(System.in);// 全局变量
 	public static String str = null;
