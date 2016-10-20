@@ -3,7 +3,7 @@ package lab1;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-//git test line
+//git test
 public class lab1 {
 	public static Scanner s = new Scanner(System.in);// 全局变量
 	public static String str = null;
