@@ -10,9 +10,8 @@ public class lab1 {
 	public static char var;
 
 	public static void main(String[] args) {
-		lab1 a = new lab1();
-		a.expression();
-		a.simplify();
+		lab1.expression();
+		lab1.simplify();
 	}
 
 	public static void expression()// 从屏幕读入到str
@@ -30,6 +29,7 @@ public class lab1 {
 		String replace = null;
 		int lenstr1;
 		str1 = s1.nextLine();
+		s1.close();
 		String pattern = "!simplify( [a-z]=[0-9]+)*";// 两种匹配模式，用来检测输入命令是否正确
 		String pattern1 = "!d/d [a-z]";
 		Pattern r = Pattern.compile(pattern);
