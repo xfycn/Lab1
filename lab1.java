@@ -23,7 +23,7 @@ public class Lab1 {
   */
   public static void expression() {
     // 从屏幕读入到str
-    System.out.println("Please input polynomial：");
+    System.out.println("Please input polynomial:");
     str = s.next();
   }
   
@@ -35,7 +35,7 @@ public class Lab1 {
   */
   public static void simplify() {
     // 简化
-    System.out.println("Please input your order：");
+    System.out.println("Please input your order:");
     Scanner s1 = new Scanner(System.in);// 从屏幕读入命令到s1中
     String str1 = null;
     String regex = null;
