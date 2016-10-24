@@ -11,8 +11,8 @@ public class Lab1 {
   public static char var;
 
   public static void main(String[] args) {
-    Lab1.expression();
-    Lab1.simplify();
+    Lab1.expression();//find bugs
+    Lab1.simplify();//find bugs
   }
 
   /**
