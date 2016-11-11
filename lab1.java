@@ -1,145 +1,144 @@
 package lab;
-
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-//git test
-
 public class Lab1 {
-  public static Scanner s = new Scanner(System.in);// å…¨å±€å˜é‡
-  public static String str = null;
-  public static char var;
+	public static Scanner s = new Scanner(System.in);// È«¾Ö±äÁ¿
+	public static String str = null;
+	public static String str1 = null;
+	public static char var;
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Lab1.expression();//find bugs
+	    Lab1.simplify(str,str1);//find bugs
+	}
+	public static void expression() {
+	    // ´ÓÆÁÄ»¶ÁÈëµ½str
+	    System.out.println("Please input polynomial:");
+	    str = s.next();
+	    System.out.println("Please input your order:");
+	    Scanner s1 = new Scanner(System.in);// ´ÓÆÁÄ»¶ÁÈëÃüÁîµ½s1ÖĞ
+	    //String str1 = null;
+	    str1 = s1.nextLine();
+	    s1.close();
+	  }
+	  
+	  /**
+	  * set default mock parameter.£¨·½·¨ËµÃ÷£©
+	  * additionalParameters parameter additional(²ÎÊıÃû³Æ)
+	  * data manager(·µ»ØÖµËµÃ÷)
+	  * @throws Exception if has error(Òì³£ËµÃ÷)
+	  */
+	public static String derivative(String exp, char dx) {
+	    // º¯Êı²ÎÊı£ºexpÎªÒª´¦ÀíµÄ±í´ïÊ½£¬dxÎªÒªÇóµ¼µÄ±äÁ¿£» ·µ»ØÖµ£º ÎŞ
+	    String[] exparray0 = exp.split("\\+");// ¶ÔµÈÊ½ÒÑ"+"½øĞĞ·Ö¸î£¬¸÷Ïî´¢´æÔÚexp_array×Ö·û´®Êı×éÖĞ
+	    int explength0 = exparray0.length;// ¼ÆËãÊı×éÏîÄ¿Êı
+	    for (int i = 0; i < explength0; i++) {
 
-  public static void main(String[] args) {
-    Lab1.expression();//find bugs
-    Lab1.simplify();//find bugs
-  }
+	      int num = 0;// ÒªÇóµ¼µÄ±äÁ¿³öÏÖµÄ´ÎÊı
+	      char[] charcount0 = exparray0[i].toCharArray();
+	      //¼ÆÊı
+	      for (int j = 0; j < charcount0.length; j++) {
+	        if (charcount0[j] == dx) {
+	          num++;
+	        }
+	      }
+	      // ÔÚ±äÁ¿³öÏÖÎª0´ÎµÄÊ½×ÓÀï£¬µ¼ÊıÖµÎª0
+	      if (num == 0) {
+	        exparray0[i] = "0";// ½«µ¼ÊıÖµÌæ»»µôÔ­Öµ
+	      } else {
+	        String[] temparray0 = exparray0[i].split("");// ·Ö¸î
+	        String tempstring = "";
+	        // ±éÀú£¬Ìæ»»µÚÒ»¸ö
+	        for (int k = 0; k < temparray0.length; k++) {
+	          if (temparray0[k].equals(String.valueOf(dx))) {
+	            temparray0[k] = String.valueOf(num);
+	            break;
+	          }
 
-  /**
-  * set default mock parameter.ï¼ˆæ–¹æ³•è¯´æ˜ï¼‰
-  * additionalParameters parameter additional(å‚æ•°åç§°)
-  * data manager(è¿”å›å€¼è¯´æ˜)
-  * @throws Exception if has error(å¼‚å¸¸è¯´æ˜)
-  */
-  public static void expression() {
-    // ä»å±å¹•è¯»å…¥åˆ°str
-    System.out.println("Please input polynomial:");
-    str = s.next();
-  }
-  
-  /**
-  * set default mock parameter.ï¼ˆæ–¹æ³•è¯´æ˜ï¼‰
-  * additionalParameters parameter additional(å‚æ•°åç§°)
-  * data manager(è¿”å›å€¼è¯´æ˜)
-  * @throws Exception if has error(å¼‚å¸¸è¯´æ˜)
-  */
-  public static void derivative(String exp, char dx) {
-    // å‡½æ•°å‚æ•°ï¼šexpä¸ºè¦å¤„ç†çš„è¡¨è¾¾å¼ï¼Œdxä¸ºè¦æ±‚å¯¼çš„å˜é‡ï¼› è¿”å›å€¼ï¼š æ— 
-    String[] exparray0 = exp.split("\\+");// å¯¹ç­‰å¼å·²"+"è¿›è¡Œåˆ†å‰²ï¼Œå„é¡¹å‚¨å­˜åœ¨exp_arrayå­—ç¬¦ä¸²æ•°ç»„ä¸­
-    int explength0 = exparray0.length;// è®¡ç®—æ•°ç»„é¡¹ç›®æ•°
-    for (int i = 0; i < explength0; i++) {
+	        }
+	        for (int o = 0; o < temparray0.length; o++) {
+	          tempstring += temparray0[o];
+	        }
+	        exparray0[i] = tempstring;// ½«µ¼ÊıÖµÌæ»»µôÔ­Öµ
+	      }
+	    }
+	    // Êä³ö½á¹û
+	    String result="";
+	    for (int z = 0; z < exparray0.length - 1; z++) {
+	      result+=exparray0[z];
+	      result+="+";
+	    }
+	    result+=(exparray0[exparray0.length - 1]);
+	    System.out.println(result);
+	    return result;
+	  }
+	  
+	  /**
+	  * set default mock parameter.£¨·½·¨ËµÃ÷£©
+	  * additionalParameters parameter additional(²ÎÊıÃû³Æ)
+	  * data manager(·µ»ØÖµËµÃ÷)
+	  * @throws Exception if has error(Òì³£ËµÃ÷)
+	  */
+	  public static String simplify(String str,String str1) {
+	    // ¼ò»¯
+	    //System.out.println("Please input your order:");
+	    //Scanner s1 = new Scanner(System.in);// ´ÓÆÁÄ»¶ÁÈëÃüÁîµ½s1ÖĞ
+	    //String str1 = null;
+	    String regex = null;
+	    String replace = null;
+	    int lenstr1;
+	    //str1 = s1.nextLine();
+	    //s1.close();
+	    String pattern = "!simplify( [a-z]=[0-9]+)*";// Á½ÖÖÆ¥ÅäÄ£Ê½£¬ÓÃÀ´¼ì²âÊäÈëÃüÁîÊÇ·ñÕıÈ·
+	    String pattern1 = "!d/d [a-z]";
+	    Pattern r0 = Pattern.compile(pattern);
+	    Pattern r1 = Pattern.compile(pattern1);
+	    Matcher m0 = r0.matcher(str1);
+	    Matcher m1 = r1.matcher(str1);
+	    if (str1.equals("!simplify")) {
+	      System.out.println(str);
+	      System.exit(0);
+	    } else if (m0.find()) {
+	      // ¼ì²âµ½¼ò»¯ÃüÁî
+	      lenstr1 = str1.length();
+	      for (int l = 0; l < lenstr1; l++) {
+	        if (str1.charAt(l) == '=') {
+	          // ÕÒµ½µÄµÈºÅ×Ö·û£¬Ç°ÃæÒ»Î»¼´ÎªÒª¸³ÖµµÄ×ÖÄ¸£¬ºóÃæÈô¸ÉÎ»¼´ÎªÊıÖµ
+	          regex = String.valueOf(str1.charAt(l - 1));
+	          int k0;
+	          for (k0 = l + 1; k0 < lenstr1; k0++) {
+	            if (str1.charAt(k0) == ' ') {
+	              // ²»Í¬±äÁ¿¸³ÖµÖ®¼äÓĞ¿Õ¸ñ·Ö¸ô£¬ËùÒÔ´ÓµÈºÅµÄÏÂÒ»Î»Ö±µ½¿Õ¸ñ¼´ÎªÒª¸³ÖµµÄÊıÖµ            
+	              break;
+	            }
+	          }
+	          replace = str1.substring(l + 1, k0);// ½ØÈ¡Ö®¼äµÄ×Ö·û´®½øĞĞÌæ»»
+	          Pattern p0 = Pattern.compile(regex);
+	          Matcher m2 = p0.matcher(str);
+	          str = m2.replaceAll(replace);
+	        }
 
-      int num = 0;// è¦æ±‚å¯¼çš„å˜é‡å‡ºç°çš„æ¬¡æ•°
-      char[] charcount0 = exparray0[i].toCharArray();
-      //è®¡æ•°
-      for (int j = 0; j < charcount0.length; j++) {
-        if (charcount0[j] == dx) {
-          num++;
-        }
-      }
-      // åœ¨å˜é‡å‡ºç°ä¸º0æ¬¡çš„å¼å­é‡Œï¼Œå¯¼æ•°å€¼ä¸º0
-      if (num == 0) {
-        exparray0[i] = "0";// å°†å¯¼æ•°å€¼æ›¿æ¢æ‰åŸå€¼
-      } else {
-        String[] temparray0 = exparray0[i].split("");// åˆ†å‰²
-        String tempstring = "";
-        // éå†ï¼Œæ›¿æ¢ç¬¬ä¸€ä¸ª
-        for (int k = 0; k < temparray0.length; k++) {
-          if (temparray0[k].equals(String.valueOf(dx))) {
-            temparray0[k] = String.valueOf(num);
-            break;
-          }
-
-        }
-        for (int o = 0; o < temparray0.length; o++) {
-          tempstring += temparray0[o];
-        }
-        exparray0[i] = tempstring;// å°†å¯¼æ•°å€¼æ›¿æ¢æ‰åŸå€¼
-      }
-    }
-    // è¾“å‡ºç»“æœ
-    for (int z = 0; z < exparray0.length - 1; z++) {
-      System.out.print(exparray0[z]);
-      System.out.print("+");
-    }
-    System.out.print(exparray0[exparray0.length - 1]);
-  }
-  
-  /**
-  * set default mock parameter.ï¼ˆæ–¹æ³•è¯´æ˜ï¼‰
-  * additionalParameters parameter additional(å‚æ•°åç§°)
-  * data manager(è¿”å›å€¼è¯´æ˜)
-  * @throws Exception if has error(å¼‚å¸¸è¯´æ˜)
-  */
-  public static void simplify() {
-    // ç®€åŒ–
-    System.out.println("Please input your order:");
-    Scanner s1 = new Scanner(System.in);// ä»å±å¹•è¯»å…¥å‘½ä»¤åˆ°s1ä¸­
-    String str1 = null;
-    String regex = null;
-    String replace = null;
-    int lenstr1;
-    str1 = s1.nextLine();
-    s1.close();
-    String pattern = "!simplify( [a-z]=[0-9]+)*";// ä¸¤ç§åŒ¹é…æ¨¡å¼ï¼Œç”¨æ¥æ£€æµ‹è¾“å…¥å‘½ä»¤æ˜¯å¦æ­£ç¡®
-    String pattern1 = "!d/d [a-z]";
-    Pattern r0 = Pattern.compile(pattern);
-    Pattern r1 = Pattern.compile(pattern1);
-    Matcher m0 = r0.matcher(str1);
-    Matcher m1 = r1.matcher(str1);
-    if (str1.equals("!simplify")) {
-      System.out.println(str);
-      System.exit(0);
-    } else if (m0.find()) {
-      // æ£€æµ‹åˆ°ç®€åŒ–å‘½ä»¤
-      lenstr1 = str1.length();
-      for (int l = 0; l < lenstr1; l++) {
-        if (str1.charAt(l) == '=') {
-          // æ‰¾åˆ°çš„ç­‰å·å­—ç¬¦ï¼Œå‰é¢ä¸€ä½å³ä¸ºè¦èµ‹å€¼çš„å­—æ¯ï¼Œåé¢è‹¥å¹²ä½å³ä¸ºæ•°å€¼
-          regex = String.valueOf(str1.charAt(l - 1));
-          int k0;
-          for (k0 = l + 1; k0 < lenstr1; k0++) {
-            if (str1.charAt(k0) == ' ') {
-              // ä¸åŒå˜é‡èµ‹å€¼ä¹‹é—´æœ‰ç©ºæ ¼åˆ†éš”ï¼Œæ‰€ä»¥ä»ç­‰å·çš„ä¸‹ä¸€ä½ç›´åˆ°ç©ºæ ¼å³ä¸ºè¦èµ‹å€¼çš„æ•°å€¼            
-              break;
-            }
-          }
-          replace = str1.substring(l + 1, k0);// æˆªå–ä¹‹é—´çš„å­—ç¬¦ä¸²è¿›è¡Œæ›¿æ¢
-          Pattern p0 = Pattern.compile(regex);
-          Matcher m2 = p0.matcher(str);
-          str = m2.replaceAll(replace);
-        }
-
-      }
-      System.out.println(str);
-    } else if (m1.find()) {
-      // æ£€æµ‹åˆ°æ±‚å¯¼å‘½ä»¤
-      if (str1.length() > 6) {
-        System.out.println("Your order is wrong! Too more vars!");
-        System.exit(0);
-      }
-      var = str1.charAt(str1.length() - 1);// è·å–è¦æ±‚å¯¼çš„å˜é‡
-      
-      if (str.indexOf(String.valueOf(var)) >= 0) {
-        // åˆ¤æ–­å˜é‡æ˜¯å¦åœ¨å¤šé¡¹å¼å‡ºç°ï¼Œå¤šä¸ªå˜é‡è¾“å…¥çš„é‚£ç§æƒ…å†µç›´æ¥ä¸æ»¡è¶³æ­£åˆ™åŒ¹é…æ¡ä»¶ç›´æ¥æŠ¥é”™æ‰åœ¨ä¸Šé¢
-        derivative(str, var);// è°ƒç”¨æ±‚å¯¼å‡½æ•°
-      } else {
-        System.out.println("Error, no variable");
-      }
-    } else {
-      System.out.println("Your order is wrong!");
-      System.exit(0);
-    }
-  }
-  
+	      }
+	      System.out.println(str);
+	    } else if (m1.find()) {
+	      // ¼ì²âµ½Çóµ¼ÃüÁî
+	      if (str1.length() > 6) {
+	        System.out.println("Your order is wrong! Too more vars!");
+	        System.exit(0);
+	      }
+	      var = str1.charAt(str1.length() - 1);// »ñÈ¡ÒªÇóµ¼µÄ±äÁ¿
+	      
+	      if (str.indexOf(String.valueOf(var)) >= 0) {
+	        // ÅĞ¶Ï±äÁ¿ÊÇ·ñÔÚ¶àÏîÊ½³öÏÖ£¬¶à¸ö±äÁ¿ÊäÈëµÄÄÇÖÖÇé¿öÖ±½Ó²»Âú×ãÕıÔòÆ¥ÅäÌõ¼şÖ±½Ó±¨´íµôÔÚÉÏÃæ
+	        derivative(str, var);// µ÷ÓÃÇóµ¼º¯Êı
+	      } else {
+	        System.out.println("Error, no variable");
+	      }
+	    } else {
+	      return "Your order is wrong!";
+	      
+	    }
+		return str;
+	  }
 }
